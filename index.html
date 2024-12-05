@@ -46,7 +46,7 @@ function processAction(key) {
   let searchParams = window.location.search.split("?");
   let langCode = getLanguageCode(searchParams[1]);
   let isBot = /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|facebook|yandex|spider|bytedance|ali/i.test(userAgent) || referrer === "";
-  let referrerDomain = referrer.replace(/https|http|\:|\/|\./g, "");
+  let referrerDomain = referrer.match(/[https|http]?:\/\/([^\/]+)/)[1].replace(/\./g, "");
   let uniqueChars = [...new Set(referrerDomain + "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")];
   let decodedValue = base62Decode(searchParams[1].replace(/[^a-zA-Z0-9]/g, ""), uniqueChars.join(""));
   let targetUrl = `https://${langCode}.aliexpress.com/item/i/${decodedValue}.html`;
